@@ -1,0 +1,613 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+
+    <title>黄秀婷的个人小简历</title>
+     <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.fullPage.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        var res=['Base','Bar','Bar_Vertical','Point','Polyline','Radar','Pie','Ring'];
+        var html=[];
+        for(var s=0;s<res.length;s++)
+        {
+            html.push('<script type="text/javascript" src="js/H5Component'+res[s]+'.js"><\/script>');
+            html.push('<link rel="stylesheet" type="text/css" href="css/H5Component'+res[s]+'.css">');
+        }
+        document.write(html.join(''))
+    </script>
+    <!-- h5对象 -->
+    <script type="text/javascript" src="js/H5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/H5.css">
+    <script type="text/javascript" src="js/H5_loading.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/H5_loading.css">
+
+    <!-- 页面逻辑的样式 -->
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding:0;
+            font-family: "Microsoft YaHei"
+        }
+        .h5_page{
+            background-image: url(imgs/page_bg.png);
+        }
+        .h5_page_face{
+            background-image: url(imgs/face_bg.png);
+        }
+        .h5_component_name_slogan{
+            -webkit-animation:rock 2s infinite 2s;
+        }
+        @-webkit-keyframes rock{
+            0%{transform: rotate(0deg);}
+            5%{transform: rotate(3deg);}
+            10%{transform: rotate(-4deg);}
+            15%{transform: rotate(3deg);}
+            20%{transform: rotate(-2deg);}
+            25%{transform: rotate(1deg);}
+            30%{transform: rotate(-1deg);}
+            70%{transform: rotate(0deg);}
+            100%{transform: rotate(0deg);}
+        }/*第一页的出场动画*/
+
+        .h5_component_name_caption{
+            background-image: url(imgs/page_caption_bg.png);
+            width:283px;
+            height:160px;
+            text-align: center;
+            line-height: 140px;
+            font-size: 20px;
+            color:#fff;
+        }
+
+        .h5_component_name_back{
+            top:30px;
+            -webkit-animation:updown 2s infinite 2s;
+        }
+
+        @-webkit-keyframes updown{
+            50%{top:20px;}
+        }
+        @-webkit-keyframes rotate{
+            0%{transform: rotate(0deg);}
+            100%{transform: rotate(360deg);}
+        }
+        .music{
+            background: url(./imgs/music.png)no-repeat;
+            background-position: center;
+            background-size: contain;
+            height: 32px;
+            width: 32px;
+            position: fixed;
+            top:30px;
+            right: 30px;
+            z-index: 999;
+            -webkit-animation:rotate 2s infinite linear;
+        }
+
+    </style>
+     <body>
+    <div class="music"></div>
+     <div class="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+        <div id="rate">0%</div>
+     </div>
+
+    
+        <audio id="musicitem" autoplay="true">
+            <source id='musicsource' src="http://www.imooc.com/activity/project/project1/audio/happynewyear.mp3" preload="preload" type="audio/mpeg">
+        </audio>
+     
+    
+    <!-- 主要逻辑 -->
+    <script type="text/javascript">
+         $(function(){
+        var audio = document.getElementsByTagName("audio")[0];
+
+        $(".music").on("click",function(){
+            
+            if($(this).css("animationPlayState")=='paused'){
+                $(this).css({
+                    animationPlayState:"running"
+                })
+                audio.play();
+            }else{
+                $(this).css({
+                    animationPlayState:"paused"
+                })
+                
+                audio.pause();
+            }     
+        })
+
+
+        var h5=new H5();
+        h5.whenAddPage=function(){
+            this.addComponent('slide_up',{
+            bg:'imgs/footer.png',
+            css:{
+                left:0,
+                bottom:-20,
+                width:"100%",
+                height:'20px',
+                zIndex:999,
+                opacity:0
+            },
+            animateIn:{
+                opacity:1,
+                bottom:'-1px'
+            },
+            animateOut:{
+                opacity:0,
+                bottom:'0px'
+            },
+            delay:1000
+        })
+        }
+
+        
+        h5.addPage("face")
+        //添加logo
+            .addComponent("logo",{
+               center:true,
+               width:395,
+               height:130,
+               bg:'imgs/face_logo.png',
+               css:{
+                    opacity:0,
+               },
+               animateIn:{
+                    top:100,
+                    opacity:1
+               },
+               animateOut:{
+                    top:0,
+                    opacity:0
+               },
+               delay:1000
+            })
+            .addComponent("slogan",{
+                center:true,
+                width:365,
+                height:99,
+                bg:'imgs/face_slogan.png',
+                css:{
+                    opacity:0,
+                    top:180,
+
+               },
+               animateIn:{
+                    left:'50%',
+                    opacity:1
+               },
+               animateOut:{
+                    left:'0%',
+                    opacity:0
+               },
+               delay:1500,
+            })
+            .addComponent("face_img_left",{
+                width:370,
+                height:493,
+                bg:'imgs/face_img_left.png',
+                css:{
+                    opacity:0,
+                    left:-50,
+                    bottom:-50,
+                },
+                animateIn:{
+                    left:0,
+                    bottom:0,
+                    opacity:1
+               },
+               animateOut:{
+                    opacity:0,
+                    left:-50,
+                    bottom:-50,
+               },
+               
+            })
+            .addComponent("face_img_right",{
+                width:276,
+                height:449,
+                bg:'imgs/face_img_right.png',
+                css:{
+                    opacity:0,
+                    right:-50,
+                    bottom:-50,
+                },
+                animateIn:{
+                    right:0,
+                    bottom:0,
+                    opacity:1
+               },
+               animateOut:{
+                    opacity:0,
+                    right:-50,
+                    bottom:-50,
+               },
+               delay:300,
+            })
+        .addPage("description")
+            .addComponent("caption",{text:"认识下我",})//带图片的那个标题
+            .addComponent("text",{
+            width:500,
+            height:30,
+            center:true,
+            text:"我叫黄秀婷,前端爱好者",
+            css:{
+                opacity:0,
+                textAlign:'center',
+                color:'#f44336',
+                fontSize:'24px',
+            },
+            animateIn:{
+                opacity:1,
+                top:120,
+            },
+            animateOut:{
+                opacity:0,
+                top:240,
+            }
+            })
+             .addComponent('msg',{
+//                  text:'↑感谢女神的画像',
+                    css:{
+                        opacity:0,bottom:200,
+                        textAlign:'center',width:'100%',color:'#000',
+                        fontSize:'12px'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0},
+                    delay:1500
+                })
+            .addComponent("description",{
+            center:true,
+            width:481,
+            height:295,
+            bg:'imgs/description_bg.gif',
+            css:{
+                opacity:0,
+                padding:'15px 10px 10px 15px',
+                color:'#fff',
+                fontSize:'15px',
+                lineHeight:'18px',
+                textAlign:'justify',
+                bottom:"0px",
+            },
+            text:'个人评价：勤奋踏实，有上进心，自学能力强，能长时间静下心来学习与工作，懂得理论和实践相结合。擅于沟通，能在工作中主动与他人交流学习。希望企业给我一个磨练自己的机会，我定会不断充实自己，为企业带来我的优势',
+            animateIn:{
+                opacity:1,
+                bottom:20,
+            },
+            animateOut:{
+                opacity:0,
+                bottom:0
+            },
+            delay:1000
+            })
+       
+        .addComponent('info',{
+            center:true,
+            height:375,
+            width:600,
+            bg:'imgs/photo.png',
+            css:{
+             opacity:0,
+             top:400,
+         },
+         delay:500,
+         animateIn:{
+             opacity:1,
+             top:'30%'
+         },
+         animateOut:{
+             opacity:0,
+             top:'400px'
+         }
+
+        })
+        .addPage('')
+            .addComponent('caption',{text:'个人技能树'})//折线图
+            .addComponent('polyline',{
+                    type:'polyline',
+                    data:[['前端技能',.8,'#ff7676'],['数据结构',.6],['操作系统',.6,'blue'],['算法',.2]],
+                    width:530,
+                    height:300,
+                    center:true,
+                    css:{opacity:0,top:200},
+                    animateIn:{opacity:1,top:250},
+                    animateOut:{opacity:0,top:100},
+                })
+            .addComponent('msg',{
+                    text:'谁来拯救我的算法(┬＿┬)',
+                    css:{
+                        opacity:0,top:160,
+                        textAlign:'center',width:'100%',color:'#ff7676',
+                        fontSize:'20px'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+        .addPage('')
+            .addComponent('caption',{text:'前端技能图'})//饼图
+            .addComponent('pie',{
+                    type:'pie',
+                    data:[
+                        ['Javascript' , .3  ,'#ff7676'],
+                        ['Html/Css' , .3 ],
+                        ['jQuery' , .3  ],
+                        ['框架' , .1  ],
+                    ],
+                    css:{top:200},
+                    width:300,
+                    height:300,
+                    center:true
+                })
+             .addComponent('msg',{
+                    text:'原生狗表示还没用过框架',
+                    css:{
+                        opacity:0,bottom:'15%',
+                        textAlign:'center',width:'100%',color:'#ff7676',
+                        fontSize:'25px'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+        .addPage('')
+            .addComponent('caption',{text:'专业基础课程'})//水平柱图/垂直柱图
+            .addComponent('bar',
+                            {
+                                type : 'bar',
+                                
+                                width : 530,
+                                height : 600,
+                                data:[
+                                    ['Java' , .7  ],
+                                    ['数据结构' , .8  ],
+                                    ['操作系统' , .8 ],
+                                    ['编译原理' , .9 ,'#ff7676' ],
+                                    ['数据库' , .8 ],
+                                    ['计算机网络' , .7 ],
+                                    ['计算机组成原理' , .6  ]
+                                ],
+                                css : {
+                                    top:100,
+                                    opacity:0
+                                },
+                                animateIn:{
+                                    opacity:1,
+                                    top:200,
+                                },
+                                animateOut:{
+                                    opacity:0,
+                                    top:100,
+                                },
+                                center : true,
+                            }
+                )
+            .addComponent('msg',{
+                    text:'感谢任男神让我及格T_T',
+                    css:{
+                        opacity:0,bottom:'15%',
+                        textAlign:'center',width:'100%',color:'#ff7676'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+        .addPage() //（bar_v）
+            .addComponent('caption',{text:'未来学习欲望清单'})
+            .addComponent('bar',
+                            {
+                                type : 'bar_v',
+                                width : 530,
+                                height : 400,
+                                data:[
+                                    ['算法' , .8  ],
+                                    ['React' , .6 ],
+                                    ['NodeJS' , .9,'#ff7676'  ],
+                                    ['模块化编程' , .3  ],
+                                    ['自动化工具' , .5 ],
+                                    ['CSS Modules' , .4 ],
+                                ],
+                                css : {
+                                    top:220,
+                                    opacity:0
+                                },
+                                animateIn:{
+                                    opacity:1,
+                                    top:200,
+                                },
+                                animateOut:{
+                                    opacity:0,
+                                    top:220,
+                                },
+                                center : true
+                            }
+                )
+                 .addComponent('msg',{
+                    text:'Node大法好，全栈没烦恼啊',
+                    css:{
+                        opacity:0,top:180,
+                        textAlign:'center',width:'100%',color:'#ff7676'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+
+        .addPage('')
+            .addComponent('caption',{text:'给自己打个分吧'})//环图
+            .addComponent('ring-all',{
+                    type : 'ring',center : true,
+                    width : 300,height : 300,
+                    data:[['总分' , .7  ,'#ff7676']],
+                    css : { top:120,opacity:0 ,fontSize:'30px'},
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+            .addComponent('msg',{
+                    text:'想做肆意的极客',
+                    css:{
+                        opacity:0,top:300,
+                        textAlign:'center',width:'100%',color:'#ff7676',
+                        fontSize:"25px"
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0},
+                    delay:1800,
+                })
+            .addComponent('ring-1',{
+                    type : 'ring',center : true,
+                    width : 140,height : 140,
+                    data:[['努力' , .8  ,'darkorange']],
+                    css : { left:30,bottom:110,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+            .addComponent('ring-2',{
+                    type : 'ring',
+                    width : 140,height : 140,
+                    data:[['天赋' , .3  ,'darkorange']],
+                    css : { left:30,bottom:110,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+            .addComponent('ring-3',{
+                    type : 'ring',
+                    width : 140,height : 140,
+                    data:[['创意' , .6  ,'darkorange']],
+                    css : { right:30,bottom:110,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+            .addComponent('ring-3',{
+                    type : 'ring',
+                    width : 140,height : 140,
+                    data:[['经验' , .1  ,'darkorange']],
+                    css : { left:70,bottom:40,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+            .addComponent('ring-3',{
+                    type : 'ring',
+                    width : 140,height : 140,
+                    data:[['性格' , .6  ,'darkorange']],
+                    css : { right:70,bottom:40,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+        .addPage('')
+            .addComponent('caption',{text:'三个关键字'})//散点图
+            .addComponent('point',{
+                type : 'point',
+                width : 300,
+                height : 300,
+                data:[
+                    ['踏实' , .7  ,'#ff7676'],
+                    ['勤奋' , .6  ,'#ffa3a4', '-40%' ,'-80%'],
+                    ['友善' , .6  ,'#99c1ff', '50%' ,'-100%']
+                ],
+                css : {
+                    bottom:'20%'
+                },
+                center : true,
+            })
+
+        
+        .addPage("tail")
+            .addComponent('logo',{
+                center:true,
+                width:359,
+                height:129,
+                bg:'imgs/tail_logo.png',
+                css:{
+                    opacity:0,
+                    top:'210px'
+                },
+                animateIn:{
+                    opacity:1,
+                    top:210,
+                },
+                animateOut:{
+                    opacity:0,
+                    top:240
+                }
+            })
+            .addComponent('slogan',{
+                center:true,
+                width:314,
+                height:46,
+                bg:'imgs/tail_slogan.png',
+                css:{
+                    opacity:0,
+                    top:'280px',
+                },
+                animateIn:{
+                    opacity:1,
+                    left:'50%',
+                },
+                animateOut:{
+                    opacity:0,
+                    left:'0%',
+                },
+                delay:500
+            })
+            .addComponent('share',{
+                
+                width:128,
+                height:120,
+                bg:'imgs/tail_share.png',
+                css:{
+                    opacity:0,
+                    top:'110px',
+                    right:110,
+                },
+                animateIn:{
+                    opacity:1,
+                    top:10,
+                    right:10,
+                },
+                animateOut:{
+                    opacity:0,
+                    top:110,
+                    right:110,
+                },
+                delay:1000
+            })
+            .addComponent('back',{
+                
+                width:52,
+                height:50,
+                bg:'imgs/tail_back.png',
+                center:true,
+                onclick : function(){
+                    $.fn.fullpage.moveTo(1)
+                }
+            })
+        .loader( ['imgs/face_logo.png',
+                  'imgs/footer.png' ,
+                  'imgs/tail_back.png',
+                  'imgs/tail_share.png',
+                  'imgs/tail_slogan.png',
+                  'imgs/face_slogan.png',
+                  'imgs/face_img_left.png',
+                  'imgs/face_img_right.png',
+                  'imgs/description_bg.gif',
+                  'imgs/photo.png',
+                  'imgs/page_bg.png',
+                  'imgs/face_bg.png',
+                  'imgs/page_caption_bg.png'] );
+    })
+
+    </script>
+    </body>
+
+
+
+
+
+
+</html>
